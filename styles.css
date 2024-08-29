@@ -1,0 +1,102 @@
+html {
+    background-color: rgb(245, 216, 216);
+    height: 100%;
+    width: 100%;
+}
+.column {
+    background-color: pink;
+    margin: 10px 10px;
+    border-radius: 15px;
+    min-width: 250px;
+    max-width: 300px;
+}
+
+.columns {
+    padding: 10px;
+    flex-wrap: wrap;
+    order: 5;
+}
+
+.add-card {
+    margin-top: auto;
+}
+
+.cards-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.tag {
+    height: 9px;
+    width: 45px;
+    margin-left: 8px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.button-container.menu {
+    display: flex;
+    justify-content:space-between;
+    margin-top: 35px;
+}
+
+#add-new-task {
+    margin-right: 10px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Oscurece el fondo */
+    display: none; /* Oculta el overlay por defecto */
+    z-index: 10; /* Asegura que esté sobre el contenido principal */
+}
+
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro tras el modal */
+    display: none; /*cambiar a flex cuando quiera mostrar el modal*/
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: lightpink;
+    padding: 20px;
+    border-radius: 5px;
+    width: 600px;
+    height:fit-content;
+    max-width: 100%;
+}
+
+.deadline {
+    border: 2px solid  rgb(243, 162, 162);
+    border-radius: 4px;
+    padding: 10px;
+    width:fit-content;
+    font-size: 15px;
+}
+
+.is-pink {
+    background-color: rgb(243, 162, 162);
+    border-color:  rgb(243, 162, 162);
+}
