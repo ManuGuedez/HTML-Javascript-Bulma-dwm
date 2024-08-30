@@ -33,6 +33,7 @@ statuses.set("add-done", "Done");
 
 let currentId = 3;
 let currentStatus;
+let currentTask = tasks[1];
 loadTasks();
 
 const addTask = document.getElementById("add-new-task");
@@ -44,6 +45,12 @@ cancel.addEventListener("click", clearModal);
 const accept = document.getElementById("accept");
 accept.addEventListener("click", addTaskHandler);
 
+const editCancel = document.getElementById("edit-cancel");
+editCancel.addEventListener("click", () => showContent(currentTask));
+
+const editAccept = document.getElementById("edit-accept");
+editAccept.addEventListener("click", () => editTask(currentTask));
+
 // para que no se cierre el modal cuando se toque sobre él
 const modals = [...document.getElementsByClassName("modal-content")];
 modals.forEach((modal) =>
@@ -54,15 +61,16 @@ modals.forEach((modal) =>
 
 // esto es para la parte de los modales específicos.
 const cancel2 = document.getElementById("cancel2");
-cancel2.addEventListener("click", clearModal);
+cancel2.addEventListener("click", clearSpecificModal);
 
 const accept2 = document.getElementById("accept2");
-accept2.addEventListener("click", addSpecificTaskHandler); // event.target.id -> obtiene el id del elemento que realizo el evento
+accept2.addEventListener("click", addSpecificTaskHandler); 
 
 const addCards = [...document.getElementsByClassName("add-card")];
 addCards.forEach((addCard) =>
   addCard.addEventListener("click", (event) => {
-    currentStatus = event.target.id;
+    currentStatus = event.target.id; // event.target.id -> obtiene el id del elemento que realizo el evento
+
     openStatusModal(event);
   })
 );
@@ -134,7 +142,6 @@ function addSpecificTaskHandler() {
   const descripcion = document.getElementById("task-description2").value.trim();
   const asignado = document.getElementById("task-assigned2").value;
   const prioridad = document.getElementById("task-priority2").value;
-  console.log(status);
   const estado = statuses.get(currentStatus);
   const fecha = document.getElementById("deadline2").value;
 
@@ -185,9 +192,18 @@ function clearModal() {
   document.getElementById("task-title").value = "";
   document.getElementById("task-description").value = "";
   document.getElementById("task-assigned").value = ASSIGNED_INITIAL_VALUE;
-  document.getElementById("task-priority"), (value = PRIORITY_INITIAL_VALUE);
+  document.getElementById("task-priority").value = PRIORITY_INITIAL_VALUE;
   document.getElementById("task-state").value = STATE_INITIAL_VALUE;
   document.getElementById("deadline").value = "";
+}
+
+function clearEditModal() {
+  document.getElementById("edit-title").value = currentTask.title;
+  document.getElementById("edit-description").value = currentTask.description;
+  document.getElementById("edit-assigned").value = ASSIGNED_INITIAL_VALUE;
+  document.getElementById("edit-priority").value = PRIORITY_INITIAL_VALUE;
+  document.getElementById("edit-state").value = STATE_INITIAL_VALUE;
+  document.getElementById("edit-deadline").value = currentTask.date;
 }
 
 function loadTasks() {
@@ -242,6 +258,7 @@ function createTaskCard(task) {
   column.insertAdjacentHTML("beforeend", template);
 
   document.getElementById(task.id).addEventListener("click", (event) => {
+    currentTask = task;
     openTaskModal(event);
     showContent(task);
   });
@@ -262,6 +279,37 @@ function openTaskModal(event) {
 }
 
 function showContent(task) {
-  document.getElementById("title-content").innerHTML = task.title;
-  document.getElementById("description-content").innerHTML = task.description;
+  document.getElementById("edit-title").setAttribute("placeholder", task.title);
+  document
+    .getElementById("edit-description")
+    .setAttribute("placeholder", task.description);
+  document.getElementById("edit-assigned").value = task.assigned;
+  document.getElementById("edit-priority").value = task.priority;
+  document.getElementById("edit-state").value = task.state;
+  document.getElementById("edit-deadline").value = task.deadline;
+}
+
+function editTask(task) {
+  const titulo = document.getElementById("edit-title").value.trim();
+  const descripcion = document.getElementById("edit-description").value.trim();
+  const asignado = document.getElementById("edit-assigned").value;
+  const prioridad = document.getElementById("edit-priority").value;
+  const estado = document.getElementById("edit-state").value;
+  const fecha = document.getElementById("edit-deadline").value;
+
+  if (titulo != "") {
+    task.title = titulo;
+  }
+  if (descripcion != "") {
+    task.description = descripcion;
+  }
+  if (fecha != "") {
+    task.date = fecha;
+  }
+
+  task.assigned = asignado;
+  task.priority = prioridad;
+  task.state = estado;
+
+  loadTasks();
 }

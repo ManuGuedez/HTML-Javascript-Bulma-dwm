@@ -18,7 +18,7 @@ html {
 }
 
 .add-card {
-    margin-top: auto;
+    margin-top: 8px;
 }
 
 .cards-container {
@@ -88,15 +88,22 @@ html {
     max-width: 100%;
 }
 
+.modal-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.field, .field-date {
+    width: 45%;
+}
+    
 .deadline {
     border: 2px solid  rgb(243, 162, 162);
     border-radius: 4px;
     padding: 10px;
-    width:fit-content;
+    width: fit-content;
     font-size: 15px;
-}
-
-.is-pink {
-    background-color: rgb(243, 162, 162);
-    border-color:  rgb(243, 162, 162);
-}
+    align-self: start !important;
+} 

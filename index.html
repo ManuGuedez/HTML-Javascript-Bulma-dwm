@@ -67,82 +67,78 @@
     <!-- modal -->
     <div class="modal" id="create-modal">
       <div class="modal-content">
-        <h2 class="has-text-centered title is-5">Crear Nueva Tarea</h2>
-        <div class="field">
-          <label class="label">Título</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              placeholder="Text input"
-              id="task-title"
-            />
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">Descripción</label>
-          <div class="control">
-            <textarea
-              class="textarea"
-              rows="3"
-              placeholder="Text input"
-              id="task-description"
-            ></textarea>
-          </div>
-        </div>
-        <div class="field has-addons">
-          <div class="control is-expanded">
-            <div class="select is-fullwidth">
-              <select name="assigned" id="task-assigned">
-                <option value="Asignado 1">Asignado 1</option>
-                <option value="Asignado 2">Asignado 2</option>
-                <option value="Asignado 3">Asignado 3</option>
-                <option value="Asignado 4">Asignado 4</option>
-              </select>
+        <h2 class="has-text-centered title is-5" id="create-title">NUEVA TAREA</h2>
+        <div class="modal-container">
+          <div class="field">
+            <label class="label">Título</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Text input"
+                id="task-title"
+              />
             </div>
           </div>
-          <div class="control">
-            <button type="submit" class="button is-pink">Asignado</button>
-          </div>
-        </div>
-        <div class="field has-addons">
-          <div class="control is-expanded">
-            <div class="select is-fullwidth">
-              <select name="country" id="task-priority">
-                <option value="Alta">Alta</option>
-                <option value="Media">Media</option>
-                <option value="Baja">Baja</option>
-              </select>
+          <div class="field">
+            <label class="label">Descripción</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Text input"
+                id="task-description"
+              />
             </div>
           </div>
-          <div class="control">
-            <button type="submit" class="button is-pink">Prioridad</button>
-          </div>
-        </div>
-        <div class="field has-addons">
-          <div class="control is-expanded">
-            <div class="select is-fullwidth">
-              <select name="country" id="task-state">
-                <option value="Backlog">Backlog</option>
-                <option value="To Do">To Do</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Blocked">Blocked</option>
-                <option value="Done">Done</option>
-              </select>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <label class="label">Asignado</label>
+              <div class="select is-fullwidth">
+                <select name="assigned" id="task-assigned">
+                  <option value="Asignado 1">Asignado 1</option>
+                  <option value="Asignado 2">Asignado 2</option>
+                  <option value="Asignado 3">Asignado 3</option>
+                  <option value="Asignado 4">Asignado 4</option>
+                </select>
+              </div>
             </div>
           </div>
-          <div class="control">
-            <button type="submit" class="button is-pink">Estado</button>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <label class="label">Prioridad</label>
+              <div class="select is-fullwidth">
+                <select name="country" id="task-priority">
+                  <option value="Alta">Alta</option>
+                  <option value="Media">Media</option>
+                  <option value="Baja">Baja</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <label class="label">Estado</label>
+              <div class="select is-fullwidth">
+                <select name="country" id="task-state">
+                  <option value="Backlog">Backlog</option>
+                  <option value="To Do">To Do</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Blocked">Blocked</option>
+                  <option value="Done">Done</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field-date">
+            <label for="deadline" class="label">Fecha limite</label>
+            <input type="date" class="deadline" id="deadline" />
           </div>
         </div>
-        <div class="field-date">
-          <label for="deadline" class="label">Fecha limite</label>
-          <input type="date" class="deadline" id="deadline" />
-        </div>
-        <div class="button-container menu">
-          <button class="button is-danger" id="cancel">Cancelar</button>
-          <button class="button is-primary" id="accept">Aceptar</button>
-        </div>
+          <div class="button-container menu">
+            <button class="button is-danger" id="cancel">Cancelar</button>
+            <button class="button is-primary" id="accept">Aceptar</button>
+          </div>
       </div>
     </div>
     <div id="overlay" class="overlay"></div>
@@ -152,61 +148,60 @@
         <h2 class="has-text-centered title is-4" id="status-title">
           Crear Nueva Tarea
         </h2>
-        <h3 class="has-text-centered" id="column-name"></h3>
-        <div class="field">
-          <label class="label">Título</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              placeholder="Text input"
-              id="task-title2"
-            />
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">Descripción</label>
-          <div class="control">
-            <input
-              class="input"
-              type="text"
-              placeholder="Text input"
-              id="task-description2"
-            />
-          </div>
-        </div>
-        <div class="field has-addons">
-          <div class="control is-expanded">
-            <div class="select is-fullwidth">
-              <select name="assigned" id="task-assigned2">
-                <option value="Asignado 1">Asignado 1</option>
-                <option value="Asignado 2">Asignado 2</option>
-                <option value="Asignado 3">Asignado 3</option>
-                <option value="Asignado 4">Asignado 4</option>
-              </select>
+        <p class="has-text-centered" id="column-name"></p><br/>
+        <div class="modal-container">
+
+          <div class="field">
+            <label class="label">Título</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Text input"
+                id="task-title2"
+              />
             </div>
           </div>
-          <div class="control">
-            <button type="submit" class="button is-pink">Asignado</button>
-          </div>
-        </div>
-        <div class="field has-addons">
-          <div class="control is-expanded">
-            <div class="select is-fullwidth">
-              <select name="priority" id="task-priority2">
-                <option value="Alta">Alta</option>
-                <option value="Media">Media</option>
-                <option value="Baja">Baja</option>
-              </select>
+          <div class="field">
+            <label class="label">Descripción</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Text input"
+                id="task-description2"
+              />
             </div>
           </div>
-          <div class="control">
-            <button type="submit" class="button is-pink">Prioridad</button>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <label class="label">Asignado</label>
+              <div class="select is-fullwidth">
+                <select name="assigned" id="task-assigned2">
+                  <option value="Asignado 1">Asignado 1</option>
+                  <option value="Asignado 2">Asignado 2</option>
+                  <option value="Asignado 3">Asignado 3</option>
+                  <option value="Asignado 4">Asignado 4</option>
+                </select>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="field-date">
-          <label for="deadline2" class="label">Fecha limite</label>
-          <input type="date" class="deadline" id="deadline2" />
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <label class="label">Prioridad</label>
+              <div class="select is-fullwidth">
+                <select name="priority" id="task-priority2">
+                  <option value="Alta">Alta</option>
+                  <option value="Media">Media</option>
+                  <option value="Baja">Baja</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field-date">
+            <label for="deadline2" class="label">Fecha limite</label>
+            <input type="date" class="deadline" id="deadline2" />
+          </div>
         </div>
         <div class="button-container menu">
           <button class="button is-danger" id="cancel2">Cancelar</button>
@@ -219,36 +214,111 @@
     <div id="edit-modal" class="modal">
       <div class="modal-content">
         <h2 class="has-text-centered title is-5">Editar tarea</h2>
-        <div id="title-container">
-          <h3>Título:</h3>
-          <div class="static-box" id="title-content"></div>
+        <div class="modal-container">
+          <div class="field">
+            <label class="label">Título</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="Text input"
+                id="edit-title"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Descripción</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="pepe es grande"
+                id="edit-description"
+              />
+            </div>
+          </div>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <label class="label">Asignado</label>
+              <div class="select is-fullwidth">
+                <select name="assigned" id="edit-assigned">
+                  <option value="Asignado 1">Asignado 1</option>
+                  <option value="Asignado 2">Asignado 2</option>
+                  <option value="Asignado 3">Asignado 3</option>
+                  <option value="Asignado 4">Asignado 4</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <label class="label">Prioridad</label>
+              <div class="select is-fullwidth">
+                <select name="country" id="edit-priority">
+                  <option value="Alta">Alta</option>
+                  <option value="Media">Media</option>
+                  <option value="Baja">Baja</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <label class="label">Estado</label>
+              <div class="select is-fullwidth">
+                <select name="country" id="edit-state">
+                  <option value="Backlog">Backlog</option>
+                  <option value="To Do">To Do</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Blocked">Blocked</option>
+                  <option value="Done">Done</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field-date">
+            <label for="edit-deadline" class="label">Fecha limite</label>
+            <input type="date" class="deadline" id="edit-deadline" />
+          </div>
         </div>
-
-        <div id="description-container">
-          <h3>Descripción:</h3>
-          <div class="static-box" id="description-content"></div>
-        </div>
-
-        <div id="assigned-container">
-          <h3>Asignado:</h3>
-          <div class="static-box" id="assigned-content"></div>
-        </div>
-
-        <div id="priority-container">
-          <h3>Prioridad:</h3>
-          <div class="static-box" id="priority-content"></div>
-        </div>
-
-        <div id="state-container">
-          <h3>Estado:</h3>
-          <div class="static-box" id="state-content"></div>
-        </div>
-
-        <div id="deadline-container">
-          <h3>Fecha límite</h3>
-          <div class="static-box" id="deadline-content"></div>
-        </div>
+          <div class="button-container menu">
+            <button class="button is-danger" id="edit-cancel">Cancelar</button>
+            <button class="button is-primary" id="edit-accept">Aceptar</button>
+          </div>
+      </div>
       </div>
     </div>
   </body>
-</html>
+  </html>
+  <!-- 
+  
+  <div id="title-container">
+    <h3>Título:</h3>
+    <div class="static-box" id="title-content"></div>
+  </div>
+
+  <div id="description-container">
+    <h3>Descripción:</h3>
+    <div class="static-box" id="description-content"></div>
+  </div>
+
+  <div id="assigned-container">
+    <h3>Asignado:</h3>
+    <div class="static-box" id="assigned-content"></div>
+  </div>
+
+  <div id="priority-container">
+    <h3>Prioridad:</h3>
+    <div class="static-box" id="priority-content"></div>
+  </div>
+
+  <div id="state-container">
+    <h3>Estado:</h3>
+    <div class="static-box" id="state-content"></div>
+  </div>
+
+  <div id="deadline-container">
+    <h3>Fecha límite</h3>
+    <div class="static-box" id="deadline-content"></div>
+  </div>
+   -->
