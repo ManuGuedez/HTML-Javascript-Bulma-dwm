@@ -233,6 +233,7 @@ function createTaskCard(task) {
                 </span>
             </button>
         </header>
+        <p class="card-description">${task.description}</p>
     </div>
     `;
 
