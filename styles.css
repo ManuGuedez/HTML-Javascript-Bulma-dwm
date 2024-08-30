@@ -7,13 +7,15 @@ html {
     background-color: pink;
     margin: 10px 10px;
     border-radius: 15px;
-    min-width: 250px;
     max-width: 300px;
+    min-width: 250px;
+    max-height: 550px;
 }
 
 .columns {
     padding: 10px;
     flex-wrap: wrap;
+    justify-content: flex-start;
     order: 5;
 }
 
@@ -24,6 +26,8 @@ html {
 .cards-container {
     margin-top: 10px;
     margin-bottom: 10px;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .card-description {
