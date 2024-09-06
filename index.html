@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
+    <title>Gestor de tareas</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
@@ -13,7 +14,7 @@
   </head>
   <body>
     <div class="header-container">
-      <h1 class="title is-1 has-text-centered">Gestor de Tareas</h1>
+      <h1 class="title is-1 has-text-centered">Gestor de Tareas</h1>   
       <div class="button-container">
         <button class="button" id="add-new-task">Add new task</button>
       </div>
@@ -62,6 +63,10 @@
           <button class="transparent-button" id="add-done">+ Add a card</button>
         </div>
       </div>
+    </div>    
+    <div class="switch-container">
+      <input type="checkbox" id="theme-switch" class="switch-input">
+      <label for="theme-switch" class="switch-label"></label>
     </div>
     <div id="overlay" class="overlay"></div>
     <!-- modal -->
@@ -283,6 +288,7 @@
         </div>
           <div class="button-container menu">
             <button class="button is-danger" id="edit-cancel">Cancelar</button>
+            <button class="button is-danger is-dark" id="edit-delete">Eliminar</button>
             <button class="button is-primary" id="edit-accept">Aceptar</button>
           </div>
       </div>

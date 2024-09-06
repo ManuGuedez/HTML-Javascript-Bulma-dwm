@@ -3,26 +3,20 @@ const ASSIGNED_INITIAL_VALUE = "Asignado 1";
 const PRIORITY_INITIAL_VALUE = "Alta";
 const STATE_INITIAL_VALUE = "Backlog";
 
-let tasks = [
-  {
-    id: 1,
-    title: "Tarea 1",
-    description: "Prueba para tarea 1",
-    assigned: ASSIGNED_INITIAL_VALUE,
-    priority: PRIORITY_INITIAL_VALUE,
-    state: STATE_INITIAL_VALUE,
-    deadline: DATE,
-  },
-  {
-    id: 2,
-    title: "Tarea 2",
-    description: "Prueba para tarea 2",
-    assigned: ASSIGNED_INITIAL_VALUE,
-    priority: PRIORITY_INITIAL_VALUE,
-    state: STATE_INITIAL_VALUE,
-    deadline: DATE,
-  },
-];
+const url = "http://localhost:3000/tasks";
+
+async function fetchDataAW() {
+  try {
+    const response = await fetch(url, { method: "GET" });
+    const data = await response.json(); // extract JSON from response
+    return data;
+  } catch (error) {
+    console.log("Error fetching data: ", error);
+  }
+}
+
+let tasks = [];
+loadTasks();
 
 const statuses = new Map();
 statuses.set("add-backlog", "Backlog");
@@ -31,11 +25,11 @@ statuses.set("add-in-progress", "In Progress");
 statuses.set("add-blocked", "Blocked");
 statuses.set("add-done", "Done");
 
-let currentId = 3;
+// let currentId = 3;
 let currentStatus;
 let currentTask = tasks[1];
-loadTasks();
 
+// Seteo los listeners de los diferentes elementos del DOM
 const addTask = document.getElementById("add-new-task");
 addTask.addEventListener("click", openModal);
 
@@ -51,6 +45,13 @@ editCancel.addEventListener("click", () => showContent(currentTask));
 const editAccept = document.getElementById("edit-accept");
 editAccept.addEventListener("click", () => editTask(currentTask));
 
+// no quedó funcionando
+const editDelete = document.getElementById("edit-delete");
+editDelete.addEventListener("click", (event) => {
+  event.preventDefault();
+  deleteTaskAW()
+});
+
 // para que no se cierre el modal cuando se toque sobre él
 const modals = [...document.getElementsByClassName("modal-content")];
 modals.forEach((modal) =>
@@ -64,7 +65,7 @@ const cancel2 = document.getElementById("cancel2");
 cancel2.addEventListener("click", clearSpecificModal);
 
 const accept2 = document.getElementById("accept2");
-accept2.addEventListener("click", addSpecificTaskHandler); 
+accept2.addEventListener("click", addSpecificTaskHandler);
 
 const addCards = [...document.getElementsByClassName("add-card")];
 addCards.forEach((addCard) =>
@@ -78,7 +79,7 @@ addCards.forEach((addCard) =>
 window.addEventListener("click", closeModals); // para que se cierre el modal cuando toco fuera de él
 
 function openModal(event) {
-  event.preventDefault();
+  // event.preventDefault();
   event.stopPropagation(); // para que se pueda cerrar el modal cuanto toco el boton
 
   const createModal = document.getElementById("create-modal");
@@ -107,7 +108,9 @@ function openStatusModal(event) {
   statusModal.style.display = "flex";
 }
 
-function addTaskHandler() {
+async function addTaskHandler(event) {
+  // event.preventDefault();
+  console.log("entra al handler");
   const titulo = document.getElementById("task-title").value.trim();
   const descripcion = document.getElementById("task-description").value.trim();
   const asignado = document.getElementById("task-assigned").value;
@@ -121,7 +124,7 @@ function addTaskHandler() {
   }
 
   const task = {
-    id: currentId,
+    // id: currentId,
     title: titulo,
     description: descripcion,
     assigned: asignado,
@@ -130,11 +133,28 @@ function addTaskHandler() {
     deadline: fecha,
   };
 
-  currentId += 1;
-  tasks.push(task);
+  // currentId += 1;
 
+  // tasks.push(task); // esto tiene que ser un post
+  // event.preventDefault();
+  createTaskFetch(task);
   clearModal();
   loadTasks();
+}
+
+async function createTaskFetch(task) {
+  console.log("taskA: pepe ");
+  try {
+    await fetch(url, {
+      method: "POST",
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(task),
+    });
+  } catch (error) {
+    console.log("Error fetching data: ", error);
+  }
 }
 
 function addSpecificTaskHandler() {
@@ -151,7 +171,7 @@ function addSpecificTaskHandler() {
   }
 
   const task = {
-    id: currentId,
+    // id: currentId,
     title: titulo,
     description: descripcion,
     assigned: asignado,
@@ -160,7 +180,7 @@ function addSpecificTaskHandler() {
     deadline: fecha,
   };
 
-  currentId += 1;
+  // currentId += 1;
   tasks.push(task);
 
   clearSpecificModal();
@@ -208,7 +228,15 @@ function clearEditModal() {
 
 function loadTasks() {
   clearColumns();
-  tasks.forEach((task) => createTaskCard(task));
+  let tasksPromise = fetchDataAW();
+
+  tasksPromise.then((data) => {
+    tasks = [...data];
+    console.log(tasks);
+    tasks.forEach((task) => {
+      createTaskCard(task);
+    });
+  });
 }
 
 function clearColumns() {
@@ -219,11 +247,11 @@ function clearColumns() {
   document.getElementById("Done").innerHTML = "";
 }
 
-function createTaskCard(task) {
+async function createTaskCard(task) {
   let tag = { Alta: "is-danger", Media: "is-warning", Baja: "is-success" };
 
   const template = `
-    <div class="card" id="${task.id}">
+    <div class="card " id="${task.id}">
         <span class="tag ${tag[task.priority]}"></span>
         <header class="card-header">
             <p class="card-header-title">${task.title}</p>
@@ -255,7 +283,6 @@ function createTaskCard(task) {
       column = document.getElementById("Done");
       break;
   }
-
   column.insertAdjacentHTML("beforeend", template);
 
   document.getElementById(task.id).addEventListener("click", (event) => {
@@ -266,7 +293,7 @@ function createTaskCard(task) {
 }
 
 function openTaskModal(event) {
-  event.preventDefault();
+  // event.preventDefault();
   event.stopPropagation();
 
   const createModal = document.getElementById("create-modal");
@@ -290,7 +317,7 @@ function showContent(task) {
   document.getElementById("edit-deadline").value = task.deadline;
 }
 
-function editTask(task) {
+async function editTask(task) {
   const titulo = document.getElementById("edit-title").value.trim();
   const descripcion = document.getElementById("edit-description").value.trim();
   const asignado = document.getElementById("edit-assigned").value;
@@ -311,6 +338,44 @@ function editTask(task) {
   task.assigned = asignado;
   task.priority = prioridad;
   task.state = estado;
+  console.log(url + `/${task.id}`);
 
+  updateTask(task);
   loadTasks();
+}
+
+async function updateTask(task) {
+  try {
+    await fetch(url + `/${task.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(task),
+    });
+  } catch (error) {
+    console.log("Error fetching data: ", error);
+  }
+}
+
+document.getElementById("theme-switch").addEventListener("change", function () {
+  const theme = this.checked ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", theme);
+});
+
+async function deleteTaskAW() {
+  try {
+    console.log("entra bien")
+    let response = await fetch(url + `/${currentTask.id}`, {
+      method: "DELETE"
+    });
+    if (response.ok) { 
+      console.log('Tarea eliminada exitosamente');
+      loadTasks(); // si se pudo eliminar se recargan
+    } else {
+      console.error('Error al eliminar la tarea:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error en la solicitud:', error);
+  }
 }
