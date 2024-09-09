@@ -11,22 +11,13 @@
       "date": "2024-08-28"
     },
     {
-      "id": "2",
-      "title": "Task 2",
-      "description": "Description 2",
-      "assigned": "Asignado 1",
-      "priority": "Baja",
-      "state": "In Progress",
-      "deadline": "2024-08-28"
-    },
-    {
-      "id": "3",
-      "title": "Task 3",
-      "description": "Description 3",
+      "id": "50e1",
+      "title": "hola",
+      "description": "Esto es una prueba de la tarea 1",
       "assigned": "Asignado 1",
       "priority": "Alta",
       "state": "In Progress",
-      "deadline": "2024-08-28"
+      "deadline": "2024-09-12"
     }
   ]
 }

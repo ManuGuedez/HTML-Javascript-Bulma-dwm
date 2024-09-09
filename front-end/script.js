@@ -48,8 +48,7 @@ editAccept.addEventListener("click", () => editTask(currentTask));
 // no quedó funcionando
 const editDelete = document.getElementById("edit-delete");
 editDelete.addEventListener("click", (event) => {
-  event.preventDefault();
-  deleteTaskAW()
+  deleteTaskAW(event)
 });
 
 // para que no se cierre el modal cuando se toque sobre él
@@ -364,9 +363,10 @@ document.getElementById("theme-switch").addEventListener("change", function () {
   document.documentElement.setAttribute("data-theme", theme);
 });
 
-async function deleteTaskAW() {
+async function deleteTaskAW(event) {
   try {
-    console.log("entra bien")
+    event.preventDefault();
+    console.log("entra bien");
     let response = await fetch(url + `/${currentTask.id}`, {
       method: "DELETE"
     });
