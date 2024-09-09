@@ -79,7 +79,7 @@ addCards.forEach((addCard) =>
 window.addEventListener("click", closeModals); // para que se cierre el modal cuando toco fuera de él
 
 function openModal(event) {
-  // event.preventDefault();
+  event.preventDefault();
   event.stopPropagation(); // para que se pueda cerrar el modal cuanto toco el boton
 
   const createModal = document.getElementById("create-modal");
@@ -109,7 +109,7 @@ function openStatusModal(event) {
 }
 
 async function addTaskHandler(event) {
-  // event.preventDefault();
+  event.preventDefault();
   console.log("entra al handler");
   const titulo = document.getElementById("task-title").value.trim();
   const descripcion = document.getElementById("task-description").value.trim();
@@ -181,7 +181,8 @@ function addSpecificTaskHandler() {
   };
 
   // currentId += 1;
-  tasks.push(task);
+  createTaskFetch(task);
+  // tasks.push(task);
 
   clearSpecificModal();
   loadTasks();
@@ -247,7 +248,7 @@ function clearColumns() {
   document.getElementById("Done").innerHTML = "";
 }
 
-async function createTaskCard(task) {
+async function createTaskCard(task) { 
   let tag = { Alta: "is-danger", Media: "is-warning", Baja: "is-success" };
 
   const template = `
